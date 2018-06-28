@@ -47,7 +47,7 @@
 						});
 						
 						FB.login(function(response){
-							
+							console.log(response);
 							if (response.authResponse)
 							{
 								console.log('logged in');
@@ -60,6 +60,7 @@
 
 
 								FB.api(`${userID}/feed`, 'post', opts, function(response) {
+									console.log(response);
 									if (!response || response.error) {
 										$("#posting_alert").text(response.error.message);
 										console.log(response.error);
@@ -75,7 +76,7 @@
 								$("#log_alert").text("Not logged in");
 								$("posting_alert").text("no posting.");
 							}
-						}, { scope : 'email, user_posts,' });
+						}, { scope : 'email,user_posts,' });
 					});
 				});
 
@@ -91,6 +92,7 @@
 						});
 												
 						FB.logout(function(response) {
+							console.log(response);
 							console.log("logged out");
 							$("#log_alert").text("logged out");
 							$("#posting_alert").text("no posting.");

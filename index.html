@@ -3,27 +3,102 @@
 	<head>
 		<title>Simple APP</title>
 		<link rel="stylesheet" type="text/css" href="common.css">
-		<link rel="stylesheet" type="text/css" href="./bootstrap-4.0.0-dist/css/bootstrap.css">
-		<script type="text/javascript" src="./jquery-3.3.1.js"></script>
-		<script type="text/javascript" src="./bootstrap-4.0.0-dist/js/bootstrap.js"></script>
-		<script type="text/javascript" src="./facebook-home.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>		<script type="text/javascript" src="./jquery-3.3.1.js"></script>
+		
 	</head>
 		<div class="container">
 			<h1>Simple App (facebook login and post)</h1>
 			<div class="btn-group-vertical" role="group" aria-label="...">
-				<a href="#" class="btn btn-primary login hidden">
-					<img class="fbImage" src="./next-button-f.png" alt="facebook" />
-					<span class="buttonText"> Login  </span>
+				<a class="btn btn-primary" id="loginbutton">
+					<img class="fbImage2" src="./next-button-f.png" alt="facebook" />
+					<span class="buttonText"> Login with facebook </span>
 				</a>
-				<a href="#" class="btn btn-info logout hidden">
-					<img class="fbImage" src="./next-button-f.png" alt="facebook" />
+				<a class="btn btn-info" id="logoutbutton">
 					<span class="buttonText"> Logout  </span>
 				</a>
-				<a href="./popuplogin.html" class="btn btn-danger">
-					Automatic login
-				</a>
+			</div>
+			<hr/>
+			<h4>User state</h4>
+			<div id="log_alert" class="alert alert-info" role="alert">
+				landing...
+			</div>
+			<h4>Posting result</h4>
+			<div id="posting_alert" class="alert alert-warning" role="alert">
+				no posting.
 			</div>
 		</div>
+
+		<script>
+			$(document).ready(function() {
+
+				$('#loginbutton').bind('click', function(){
+					$.ajaxSetup({ cache: true });
+					$.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+						FB.init({
+							appId      : '225273678199615',                    // App ID from the app dashboard
+							status     : true,                                 // Check Facebook Login status
+							xfbml      : true,                                  // Look for social plugins on the page
+							oauth      : true,                                  // Enable oauth authentication
+							version	   : 'v3.0',
+						});
+						
+						FB.login(function(response){
+							
+							if (response.authResponse)
+							{
+								console.log('logged in');
+								$("#log_alert").text("logged in");
+								var userID = response.authResponse.userID;
+								var opts = {
+									message : 'like something',
+									access_token: response.authResponse.accessToken,
+								};
+
+
+								FB.api(`${userID}/feed`, 'post', opts, function(response) {
+									if (!response || response.error) {
+										$("#posting_alert").text(response.error.message);
+										console.log(response.error);
+
+									} else {
+										console.log('Post ID: ' + response.id);
+										$("#posting_alert").text('Post ID:' + response.id);
+									}									
+								});
+
+							}else{
+								console.log('Not logged in');
+								$("#log_alert").text("Not logged in");
+								$("posting_alert").text("no posting.");
+							}
+						}, { scope : 'email, user_posts,' });
+					});
+				});
+
+				$('#logoutbutton').bind('click', function(){
+					$.ajaxSetup({ cache: true });
+					$.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+						FB.init({
+							appId      : '225273678199615',                    // App ID from the app dashboard
+							status     : true,                                 // Check Facebook Login status
+							xfbml      : true,                                  // Look for social plugins on the page
+							oauth      : true,                                  // Enable oauth authentication
+							version	   : 'v3.0',
+						});
+												
+						FB.logout(function(response) {
+							console.log("logged out");
+							$("#log_alert").text("logged out");
+							$("#posting_alert").text("no posting.");
+						});
+					});
+				});
+			});
+		</script>
 	<body>
 	</body>
 </html>

@@ -6,15 +6,21 @@
     position: absolute;
     top: 9px;
     left: 11px;
+    text-align: center;
   }
   
+
+  .fbImage2 {
+    width: 19px;
+    height: 19px;
+  }
 
   .buttonText {
     color: #fff;
     text-align: center;
     text-shadow: 0 -2px 0 #425993;
   }
-  
-  .hideen {
-      display: none;
+
+  .hidden {
+    display:none;
   }

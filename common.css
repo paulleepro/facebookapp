@@ -1,0 +1,20 @@
+  
+  
+  .fbImage {
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    top: 9px;
+    left: 11px;
+  }
+  
+
+  .buttonText {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 -2px 0 #425993;
+  }
+  
+  .hideen {
+      display: none;
+  }

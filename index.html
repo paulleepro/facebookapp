@@ -2,40 +2,135 @@
 <html>
 	<head>
 		<title>Simple APP</title>
-		<link rel="stylesheet" type="text/css" href="common.css">
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
+		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>		<script type="text/javascript" src="./jquery-3.3.1.js"></script>
-		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="common.css">
+
 	</head>
-		<div class="container">
-			<h1>Simple App (facebook login and post)</h1>
-			<div class="btn-group-vertical" role="group" aria-label="...">
-				<a class="btn btn-primary" id="loginbutton">
-					<img class="fbImage2" src="./next-button-f.png" alt="facebook" />
-					<span class="buttonText"> Login with facebook </span>
-				</a>
-				<a class="btn btn-info" id="logoutbutton">
-					<span class="buttonText"> Logout  </span>
-				</a>
+	<body>
+		<div class="modal login-modal-container" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+			<div class="modal-foreground"></div>
+			<div class="modal-dialog modal-sm login-modal-content" role="document">
+				<div class="modal-content ">
+					<div class="modal-header">							
+						<h3 class="welcome-app w-100 text-center">Welcome to the App</h3>
+					</div>
+					<div class="modal-body">
+						<a class="btn btn-primary btn-block" id="loginButton">
+							<img class="fbImage2" src="./next-button-f.png" alt="facebook" />
+							<span class="buttonText"> Login with facebook </span>
+						</a>
+						<br/>
+						<br/>
+						<h6>User state</h6>
+						<div id="log_alert" class="alert alert-info " role="alert">
+							landing...
+						</div>
+						<h6>Posting result</h6>
+						<div id="posting_alert" class="alert alert-warning" role="alert">
+							no posting.
+						</div>
+					</div>
+					<div class="modal-footer">
+					</div>		
+				</div>
 			</div>
-			<hr/>
-			<h4>User state</h4>
-			<div id="log_alert" class="alert alert-info" role="alert">
-				landing...
+		</div>
+		
+		<div class="container-fluid">
+			<div class="jumbotron jumbotron-fluid">
+				<div class="container">
+					<h1 class="display-3">Welcome</h1>
+					<p class="lead">
+						This is a simple App.
+					</p>
+				</div>
 			</div>
-			<h4>Posting result</h4>
-			<div id="posting_alert" class="alert alert-warning" role="alert">
-				no posting.
+			
+			<a class="btn btn-info logout-button" id="logoutButton">
+				<img class="fbImage2" src="./next-button-f.png" alt="facebook" />
+				<span class="buttonText"> Logout  </span>
+			</a>
+
+			<div class="container-fluid card-group">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="card">
+							<img class="card-img-top" src="./products/product-1.jpg" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title">Special title treatment</h5>
+								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+								<a class="btn btn-success text-white" href="./products/product-1.jpg" download>download</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+							<div class="card">
+								<img class="card-img-top" src="./products/product-2.jpg" alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+									<a class="btn btn-success text-white" href="./products/product-2.jpg" download>download</a>
+								</div>
+							</div>
+					</div>
+					<div class="col-sm-4">
+							<div class="card">
+									<img class="card-img-top" src="./products/product-3.jpg" alt="Card image cap">
+									<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+									<a class="btn btn-success text-white" href="./products/product-3.jpg" download>download</a>
+								</div>
+							</div>
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="card">
+							<img class="card-img-top" src="./products/product-4.jpg" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title">Special title treatment</h5>
+								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+								<a class="btn btn-success text-white" href="./products/product-4.jpg" download>download</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+							<div class="card">
+								<img class="card-img-top" src="./products/product-5.jpg" alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+									<a class="btn btn-success text-white" href="./products/product-5.jpg" download>download</a>
+								</div>
+							</div>
+					</div>
+					<div class="col-sm-4">
+							<div class="card">
+								<img class="card-img-top" src="./products/product-6.jpg" alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+									<a class="btn btn-success text-white" href="./products/product-6.jpg" download>download</a>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="alert alert-info" id="request_result">
+
 			</div>
 		</div>
 
 		<script>
 			$(document).ready(function() {
 
-				$('#loginbutton').bind('click', function(){
+				$('#loginButton').bind('click', function(){
 					$.ajaxSetup({ cache: true });
 					$.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
 						FB.init({
@@ -47,10 +142,8 @@
 						});
 						
 						FB.login(function(response){
-							console.log(response);
 							if (response.authResponse)
 							{
-								console.log('logged in');
 								$("#log_alert").text("logged in");
 								var userID = response.authResponse.userID;
 								var opts = {
@@ -58,21 +151,19 @@
 									access_token: response.authResponse.accessToken,
 								};
 
-
 								FB.api(`${userID}/feed`, 'post', opts, function(response) {
-									console.log(response);
 									if (!response || response.error) {
 										$("#posting_alert").text(response.error.message);
-										console.log(response.error);
-
+										$("#request_result").text(response.error.message);
 									} else {
-										console.log('Post ID: ' + response.id);
+										$("#request_result").text('Post ID:' + response.id);
 										$("#posting_alert").text('Post ID:' + response.id);
 									}									
 								});
 
+								$("#loginModal").hide();
+
 							}else{
-								console.log('Not logged in');
 								$("#log_alert").text("Not logged in");
 								$("posting_alert").text("no posting.");
 							}
@@ -80,7 +171,7 @@
 					});
 				});
 
-				$('#logoutbutton').bind('click', function(){
+				$('#logoutButton').bind('click', function(){
 					$.ajaxSetup({ cache: true });
 					$.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
 						FB.init({
@@ -92,15 +183,15 @@
 						});
 												
 						FB.logout(function(response) {
-							console.log(response);
-							console.log("logged out");
 							$("#log_alert").text("logged out");
 							$("#posting_alert").text("no posting.");
+							$("#request_result").text("");
+							$("#loginModal").show();
 						});
 					});
 				});
 			});
+
 		</script>
-	<body>
 	</body>
 </html>
